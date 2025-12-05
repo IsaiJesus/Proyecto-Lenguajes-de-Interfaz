@@ -1,3 +1,4 @@
+// x = 640, y = 200
 # include <stdio.h>
 # include <math.h>
 
@@ -34,24 +35,26 @@ void lineaH(int x, int y, int longitud, char c){
 }
 
 int main(){
-  int i, j, longitud = 80;
+  int i, radio = 4, ballX = 0, ballY = 0;
+  int j = 0, longitud = 80, lat = 0;
   video(6);
 
   while(!kbhit()){
-    delay(50);
-    for(i = 4; i > 0; i--){
-      circulo(4, 4, i, 1);
+    circulo(ballX, ballY, radio, 0);
+    lineaH(j, 100, longitud, 0);
+
+    if(lat == 0){
+      j++;
+      if(j >= (640 - longitud)) lat = 1;
+    } else if(lat == 1){
+      if(j <= 0) lat = 0;
+      j--;
     }
-    for(j = 0; j < (640 - longitud); j++){
-      if(kbhit()) break;
-      lineaH(j, 100, longitud, 1);
-      lineaH(j, 100, longitud, 0);
-    }
-    for(j = (640 - longitud); j > 0; j--){
-      if(kbhit()) break;
-      lineaH(j, 100, longitud, 1);
-      lineaH(j, 100, longitud, 0);
-    }
+    ballX ++;
+    ballY ++;
+    
+    lineaH(j, 100, longitud, 1);
+    circulo(ballX, ballY, radio, 1);
   }
 
   getch();
