@@ -48,7 +48,7 @@ int main(){
   int j = 0, longitud, lat = 0;
   // Círculo
   int i, radio = 4, ballX = 0, ballY = 0;
-  int ar = 1, de = 0, ab = 0, iz = 1;
+  int top = 1, left = 1;
   
   clear();
   printf("Introduce la altura de la linea (1 - 199): ");
@@ -71,47 +71,41 @@ int main(){
       j--;
     }
 
-    if(ar == 1 && iz == 1){
+    if(top == 1 && left == 1){
       ballX ++;
       ballY ++;
     }
-    if(ar == 1 && de == 1){
+    if(top == 1 && left == 0){
       ballX --;
       ballY ++;
     }
-    if(ab == 1 && iz == 1){
+    if(top == 0 && left == 1){
       ballX ++;
       ballY --;
     }
-    if(ab == 1 && de == 1){
+    if(top == 0 && left == 0){
       ballX --;
       ballY --;
     }
 
     if(ballX + radio == 640){
-      de = 1;
-      iz = 0;
+      left = 0;
     }
     if(ballY + radio == 200){
-      ab = 1;
-      ar = 0;
+      top = 0;
     }
     if(ballX - radio == 0){
-      iz = 1;
-      de = 0;
+      left = 1;
     }
     if(ballY - radio == 0){
-      ar = 1;
-      ab = 0;
+      top = 1;
     }
     // Colisiones con línea horizontal
-    if(ballY - radio == linY && ab == 1 && ballX >= j && ballX <= (j + longitud)){
-      ar = 1;
-      ab = 0;
+    if(ballY - radio == linY && top == 0 && ballX >= j && ballX <= (j + longitud)){
+      top = 1;
     }
-    if(ballY + radio == linY && ar == 1 && ballX >= j && ballX <= (j + longitud)){
-      ar = 0;
-      ab = 1;
+    if(ballY + radio == linY && top == 1 && ballX >= j && ballX <= (j + longitud)){
+      top = 0;
     }
     
     lineaH(j, linY, longitud, 1);
