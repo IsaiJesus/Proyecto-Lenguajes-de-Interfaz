@@ -45,9 +45,10 @@ void lineaH(int x, int y, int longitud, char c){
 int main(){
   // Línea horizontal
   int linY;
-  int j = 0, longitud, lat = 0;
+  int linX = 0, longitud, lat = 0;
   // Círculo
-  int i, radio = 4, ballX = 0, ballY = 0;
+  int radio = 4, ballX = 0, ballY = 0;
+  // booleanos
   int top = 1, left = 1;
   
   clear();
@@ -61,14 +62,14 @@ int main(){
 
   while(!kbhit()){
     circulo(ballX, ballY, radio, 0);
-    lineaH(j, linY, longitud, 0);
+    lineaH(linX, linY, longitud, 0);
 
     if(lat == 0){
-      j++;
-      if(j >= (640 - longitud)) lat = 1;
+      linX++;
+      if(linX >= (640 - longitud)) lat = 1;
     } else if(lat == 1){
-      if(j <= 0) lat = 0;
-      j--;
+      if(linX <= 0) lat = 0;
+      linX--;
     }
 
     if(top == 1 && left == 1){
@@ -101,14 +102,14 @@ int main(){
       top = 1;
     }
     // Colisiones con línea horizontal
-    if(ballY - radio == linY && top == 0 && ballX >= j && ballX <= (j + longitud)){
+    if(ballY - radio == linY && top == 0 && ballX >= linX && ballX <= (linX + longitud)){
       top = 1;
     }
-    if(ballY + radio == linY && top == 1 && ballX >= j && ballX <= (j + longitud)){
+    if(ballY + radio == linY && top == 1 && ballX >= linX && ballX <= (linX + longitud)){
       top = 0;
     }
     
-    lineaH(j, linY, longitud, 1);
+    lineaH(linX, linY, longitud, 1);
     circulo(ballX, ballY, radio, 1);
   }
 
