@@ -49,19 +49,15 @@ int main(){
   // Círculo
   int i, radio = 4, ballX = 0, ballY = 0;
   int ar = 1, de = 0, ab = 0, iz = 1;
-  video(6);
-
+  
+  clear();
   printf("Introduce la altura de la linea (1 - 199): ");
   scanf("%d", &linY);
   printf("Introduce la longitud de la linea (1 - 640): ");
   scanf("%d", &longitud);
   printf("Pulsa cualquier tecla para salir");
 
-  // Borra el enter del printf y espera a que se pulse una tecla
-  fflush(stdin); 
-  getch();
-
-  clear();
+  video(6);
 
   while(!kbhit()){
     circulo(ballX, ballY, radio, 0);
