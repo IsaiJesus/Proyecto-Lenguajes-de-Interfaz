@@ -55,7 +55,7 @@ int main(){
   scanf("%d", &linX);
   printf("Introduce la posicion en Y de la linea (1 - 199): ");
   scanf("%d", &linY);
-  printf("Pulsa cualquier tecla para salir");
+  printf("Pulsa ESC para salir");
 
   video(6);
 
