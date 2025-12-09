@@ -44,49 +44,61 @@ void lineaH(int x, int y, int longitud, char c){
 
 int main(){
   // Línea horizontal
-  int linY;
-  int linX = 0, longitud, lat = 0;
+  int linX, linY, longitud = 100;
   // Círculo
   int radio = 4, ballX = 0, ballY = 0;
-  // booleanos
-  int top = 1, left = 1;
+  // Booleanos
+  int top = 1, left = 1, escPressed = 0;
   
   clear();
-  printf("Introduce la altura de la linea (1 - 199): ");
+  printf("Introduce la posicion en X de la linea (1 - 539): ");
+  scanf("%d", &linX);
+  printf("Introduce la posicion en Y de la linea (1 - 199): ");
   scanf("%d", &linY);
-  printf("Introduce la longitud de la linea (1 - 640): ");
-  scanf("%d", &longitud);
   printf("Pulsa cualquier tecla para salir");
 
   video(6);
 
-  while(!kbhit()){
+  while(escPressed == 0){
     circulo(ballX, ballY, radio, 0);
     lineaH(linX, linY, longitud, 0);
 
-    if(lat == 0){
-      linX++;
-      if(linX >= (640 - longitud)) lat = 1;
-    } else if(lat == 1){
-      if(linX <= 0) lat = 0;
-      linX--;
+    if(kbhit()){
+      char tecla = getch();
+
+      if(tecla == 27) escPressed = 1;
+      if(tecla == 0){
+        tecla = getch();
+        // Izquierda
+        if(tecla == 75){
+          if(linX > 1){
+            linX -= 3;
+          }
+        }
+        // Derecha
+        if(tecla == 77){
+          if(linX < (639 - longitud)){
+            linX += 3;
+          }
+        }
+      }
     }
 
     if(top == 1 && left == 1){
-      ballX ++;
-      ballY ++;
+      ballX += 2;
+      ballY += 2;
     }
     if(top == 1 && left == 0){
-      ballX --;
-      ballY ++;
+      ballX -= 2;
+      ballY += 2;
     }
     if(top == 0 && left == 1){
-      ballX ++;
-      ballY --;
+      ballX += 2;
+      ballY -= 2;
     }
     if(top == 0 && left == 0){
-      ballX --;
-      ballY --;
+      ballX -= 2;
+      ballY -= 2;
     }
 
     if(ballX + radio == 640){
@@ -113,6 +125,6 @@ int main(){
     circulo(ballX, ballY, radio, 1);
   }
 
-  getch();
+  //getch();
   return 0;
 }
